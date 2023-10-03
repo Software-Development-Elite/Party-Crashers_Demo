@@ -9,6 +9,7 @@ function player_setup() {
     player = createSprite(500,300,50,50);
     player.shapeColor = ("white");
     player.addImage(player_img);
+    player.scale=(1.5)
 
 }
 
