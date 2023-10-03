@@ -11,6 +11,6 @@ function preloader() {
 function preloadSetup() {
     if(gameState === playState) {
         player.addImage("idle", player_img);
-        player.scale=(5.0);
+        player.scale=(10.0);
     }
 }
