@@ -4,6 +4,7 @@ function playSetup() {
     if(gameState === playState) {
         start_button.remove();
 
+        sceneSetup();
         player_setup();
         enemy_setup();
         health_setup();
@@ -17,6 +18,10 @@ function playDraw() {
         player_draw();
         health_draw();
         detection_draw();
+        fy_draw();
+
+        combatSystem();
+        refill_system();
 
         debugEnabled();
     }

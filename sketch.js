@@ -1,5 +1,5 @@
 function preload() {
-    player_img = loadImage("js/img/player.png");
+    preloader();
 }
 
 function setup() {
@@ -7,6 +7,7 @@ function setup() {
 
     menuSetup();
     playSetup();
+    preloadSetup();
 }
 
 function draw() {
