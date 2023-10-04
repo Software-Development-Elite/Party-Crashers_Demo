@@ -2,6 +2,8 @@ var healthCount = 100;
 var healthMax = 100;
 var healthBar;
 
+var enemyHealth = 5; 
+
 function health_setup() {
     healthBar = createSprite(player.x, player.y-30, healthCount/3, 7);
     healthBar.visible=false;
@@ -36,6 +38,11 @@ function health_draw() {
 
     if(keyDown("v")) {
         healthBar.visible = true;
+    }
+
+    if(enemyHealth === 0) {
+        enemy.remove();
+        enemy_detection.remove();
     }
 }
 

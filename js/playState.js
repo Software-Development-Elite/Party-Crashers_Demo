@@ -9,6 +9,7 @@ function playSetup() {
         enemy_setup();
         health_setup();
         detection_setup();
+        combatSetup();
     }
 }
 
@@ -19,6 +20,7 @@ function playDraw() {
         health_draw();
         detection_draw();
         fy_draw();
+        preloadDraw();
 
         combatSystem();
         refill_system();
