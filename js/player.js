@@ -15,6 +15,7 @@ var XL = 4;
 
 function player_setup() {
     player = createSprite(200,300,50,50);
+    player.setCollider("rectangle", 0, 0, 50, 50);
     player.shapeColor = ("white");
 
 }

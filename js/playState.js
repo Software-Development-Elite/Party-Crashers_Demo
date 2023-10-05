@@ -20,7 +20,10 @@ function playDraw() {
         health_draw();
         detection_draw();
         fy_draw();
+        collisionDraw();
         preloadDraw();
+
+        enemy.attractionPoint(enemy_speed, player.position.x, player.position.y);
 
         combatSystem();
         refill_system();

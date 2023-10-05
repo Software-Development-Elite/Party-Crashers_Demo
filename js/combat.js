@@ -68,6 +68,11 @@ function combatSystem() {
         round.remove();
         enemyHealth -= 1;
     }
+
+    if(fy_edges.isTouching(roundGroup)) {
+        console.log("aaa");
+        round.remove();
+    }
 }
 
 console.log("combat.js is working");
