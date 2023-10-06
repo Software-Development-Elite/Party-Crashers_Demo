@@ -20,10 +20,16 @@ function detection_draw() {
 
     if(player.isTouching(enemy_detection)){
         enemy.shapeColor = ("red");
+        chaseMode = 2;
     }else if(player_detection.isTouching(enemy_detection)){
         enemy.shapeColor = ("orange");
     }else {
         enemy.shapeColor = ("yellow")
+        if(frameCount % 300 === 0) {
+            if(chaseMode === 2) {
+                chaseMode = 0;
+            }
+        }
     }
 }
 console.log("detection.js is working");

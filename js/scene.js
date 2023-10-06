@@ -15,13 +15,13 @@ function sceneSetup() {
 
 function front_yard() {
     if(sceneState === level1) {
-        front_yard_map = createSprite(200, 200, 300, 300);
+        front_yard_map = createSprite(200, 200, 800, 800);
         front_yard_map.shapeColor = ("blue");
 
-        fy_top = createSprite(front_yard_map.x, front_yard_map.y-150, front_yard_map.width, 10);
-        fy_left = createSprite(front_yard_map.x-150, front_yard_map.y, 10, front_yard_map.height);
-        fy_right = createSprite(front_yard_map.x+150, front_yard_map.y, 10, front_yard_map.width);
-        fy_bottom = createSprite(front_yard_map.x, front_yard_map.y+150, front_yard_map.width, 10);
+        fy_top = createSprite(front_yard_map.x, front_yard_map.y-400, front_yard_map.width, 10);
+        fy_left = createSprite(front_yard_map.x-400, front_yard_map.y, 10, front_yard_map.height);
+        fy_right = createSprite(front_yard_map.x+400, front_yard_map.y, 10, front_yard_map.width);
+        fy_bottom = createSprite(front_yard_map.x, front_yard_map.y+400, front_yard_map.width, 10);
 
         fy_edges = createGroup()
 

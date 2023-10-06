@@ -2,7 +2,8 @@ var healthCount = 100;
 var healthMax = 100;
 var healthBar;
 
-var enemyHealth = 5; 
+var enemyHealth = enemyHMax; 
+var enemyHMax = 5;
 
 function health_setup() {
     healthBar = createSprite(player.x, player.y-30, healthCount/3, 7);
@@ -32,6 +33,10 @@ function health_draw() {
         healthBar.shapeColor = ("red");
     }
 
+    if(healthCount < 0) {
+        healthCount = 0;
+    }
+
     if(healthCount === 0) {
         gameState = gameOver;
     }
@@ -43,6 +48,8 @@ function health_draw() {
     if(enemyHealth === 0) {
         enemy.remove();
         enemy_detection.remove();
+        enemyKilled += 1;
+        chaseMode = 0;
     }
 }
 

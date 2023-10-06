@@ -6,6 +6,8 @@ function menuSetup() {
     if(gameState === menuState) {
         start_button = createSprite(500, 300, 80, 50);
         start_button.shapeColor = ("green");
+        camera.x = 500;
+        camera.y = 300
     }
 }
 
@@ -14,8 +16,6 @@ function menuDraw() {
         background("purple");
         if(mousePressedOver(start_button)) {
             gameState = playState;
-            healthCount = healthMax;
-            debugMode = false;
             setup();
             redraw();
         }

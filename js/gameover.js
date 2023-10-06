@@ -2,11 +2,14 @@ var gameOver = 2;
 
 function gameoverDraw() {
     if(gameState === gameOver) {
-        player.remove();
-        enemy.remove();
-        player_detection.remove();
-        enemy_detection.remove();
-        healthBar.remove();
+        player.destroy();
+        enemy.destroy();
+        player_detection.destroy();
+        enemy_detection.destroy();
+        healthBar.destroy();
+        rock_pile.destroy();
+        roundGroup.destroyEach();
+        enemyRound_group.destroyEach();
         if(sceneState === 1) {
             front_yard_map.remove();
             fy_top.remove();

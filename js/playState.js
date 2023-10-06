@@ -3,6 +3,10 @@ var playState = 1;
 function playSetup() {
     if(gameState === playState) {
         start_button.remove();
+        healthCount = healthMax;
+        enemyHealth = enemyHMax;
+        ammoCount = 5;
+        debugMode = false;
 
         sceneSetup();
         player_setup();
@@ -19,13 +23,13 @@ function playDraw() {
         player_draw();
         health_draw();
         detection_draw();
+        enemy_draw();
         fy_draw();
         collisionDraw();
         preloadDraw();
 
-        enemy.attractionPoint(enemy_speed, player.position.x, player.position.y);
-
         combatSystem();
+        scoringSystem();
         refill_system();
 
         debugEnabled();

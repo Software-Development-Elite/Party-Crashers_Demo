@@ -21,17 +21,35 @@ function player_setup() {
 }
 
 function player_draw() {
-    player.animation.stop();
+    camera.x = player.x;
+    camera.y = player.y;
+
+    if(side === left) {
+        player.changeAnimation("player_idle2");
+        player.animation.play();
+    }else if(side === right) {
+        player.changeAnimation("player_idle1");
+        player.animation.play();
+    }
 
     if(keyDown("w")) {
         player.y = player.y-5;
         playerP_state = YU;
+
+        if(side === right) {
+            player.changeAnimation("player_up1");
+            player.animation.play();
+        }else if(side === left) {
+            player.changeAnimation("player_up2");
+            player.animation.play();
+        }
     }
 
     if(keyDown("a")) {
         player.x = player.x-5;
         playerP_state = XL;
-        player.changeAnimation("player2")
+        side = left;
+        player.changeAnimation("player2");
         player.animation.play();
     }
 
@@ -43,24 +61,9 @@ function player_draw() {
     if(keyDown("d")) {
         player.x = player.x+5;
         playerP_state = XR;
+        side = right;
         player.changeAnimation("player1");
         player.animation.play();
-    }
-
-    if(keyDown("up_arrow")) {
-        playerP_state = YU;
-    }
-
-    if(keyDown("left_arrow")) {
-        playerP_state = XL;
-    }
-
-    if(keyDown("down_arrow")) {
-        playerP_state = YD;
-    }
-
-    if(keyDown("right_arrow")) {
-        playerP_state = XR;
     }
 
     //player.animation.play();
