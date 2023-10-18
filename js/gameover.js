@@ -6,6 +6,7 @@ function gameoverDraw() {
         enemy.destroy();
         enemy2.destroy();
         enemy3.destroy();
+        item.destroy();
         player_detection.destroy();
         enemy_detection.destroy();
         healthBar.destroy();

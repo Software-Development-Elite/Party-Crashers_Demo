@@ -5,7 +5,7 @@ var roundGroup;
 var roundDamage = 1;
 
 var tool_type = "Sling Shot";
-var slingShot_level = 1;
+var slingShot_level = 3;
 
 var enemyRound;
 var enemyRound_group;
@@ -16,12 +16,14 @@ function combatSetup() {
 }
 
 function combatSystem() {
+    //console.log(enemyHealth, enemy2Health, enemy3Health);
     if(ammoCount > 0) {
         if(keyDown("up_arrow")) {
             if(frameCount % 12 === 0) {
                 round = createSprite(player.x, player.y, 15, 15);
                 round.addImage(rock_img);
                 round.setCollider("rectangle", 0, 0, 15, 15);
+                round.rotationSpeed += 16;
                 roundGroup.add(round);
                 round.velocityY = -20;
                 ammoCount -= 1;
@@ -32,6 +34,7 @@ function combatSystem() {
                 round = createSprite(player.x, player.y, 15, 15);
                 round.addImage(rock_img);
                 round.setCollider("rectangle", 0, 0, 15, 15);
+                round.rotationSpeed += 16;
                 roundGroup.add(round);
                 round.velocityX = -20;
                 ammoCount -= 1;
@@ -41,6 +44,7 @@ function combatSystem() {
                 round = createSprite(player.x, player.y, 15, 15);
                 round.addImage(rock_img);
                 round.setCollider("rectangle", 0, 0, 15, 15);
+                round.rotationSpeed += 16;
                 roundGroup.add(round);
                 round.velocityY = 20;
                 ammoCount -= 1;
@@ -51,6 +55,7 @@ function combatSystem() {
                 round = createSprite(player.x, player.y, 15, 15);
                 round.addImage(rock_img);
                 round.setCollider("rectangle", 0, 0, 15, 15);
+                round.rotationSpeed += 16;
                 roundGroup.add(round);
                 round.velocityX = 20;
                 ammoCount -= 1;
@@ -159,6 +164,18 @@ function combatSystem() {
                 enemyRound.velocityX =20;
             }
         }
+    }
+
+    if(enemyHealth < 0){
+        enemyHealth = 0;
+    }
+
+    if(enemy2Health < 0){
+        enemy2Health = 0;
+    }
+
+    if(enemy3Health < 0){
+        enemy3Health = 0;
     }
 }
 

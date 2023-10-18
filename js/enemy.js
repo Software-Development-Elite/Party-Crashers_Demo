@@ -88,6 +88,7 @@ function enemy_setup() {
     enemy3.shapeColor = ("yellow");
     enemy3.setCollider("rectangle", 0, 0, 25, 25);
     enemy3.friction = enemy_friction;
+    enemy3.rotationSpeed
 
   // enemy.attractionPoint(1, player.position.x, player.position.y);
 }
@@ -137,7 +138,7 @@ function enemy_draw() {
     enemy3.attractionPoint(enemy_speed, player.position.x, player.position.y);
 
     if(frameCount % 300 === 0) {
-        enemy3.attractionPoint(enemy_speed*200, previous_playerX, previous_playerY);
+        enemy3.attractionPoint(enemy_speed*125, previous_playerX, previous_playerY);
     }
 }
 

@@ -28,9 +28,9 @@ function preloader() {
     rocks_img = loadImage("js/img/rocks.png");
     rock_img = loadImage("js/img/rock.png");
 
-    slingShot1_img = loadImage("js/img/slingshot1.png");
-    slingShot2_img = loadImage("js/img/slingshot2.png");
-    slingShot3_img = loadImage("js/img/slingshot3.png");
+    slingShot1_img = loadImage("js/img/slingShot1.png");
+    slingShot2_img = loadImage("js/img/slingShot2.png");
+    slingShot3_img = loadImage("js/img/slingShot3.png");
 
     level_1 = loadImage("js/img/maps/level1.png")
 }
@@ -60,7 +60,25 @@ function preloadSetup() {
         front_yard_map.addImage("level1", level_1);
 
         item.addImage("slingshot1", slingShot1_img);
+        item.addImage("slingshot2", slingShot2_img);
+        item.addImage("slingshot3", slingShot3_img);
+
+        level2_sprite.addImage("slingShot2", slingShot2_img);
+        level3_sprite.addImage("slingShot3", slingShot3_img);
     }
 }
 
-function preloadDraw() {}
+function preloadDraw() {
+    console.log(slingShot_level);
+    if(slingShot_level === 1) {
+        item.changeImage("slingshot1");
+        roundDamage = 1;
+    }else if(slingShot_level === 2){
+        item.changeImage("slingshot2");
+        roundDamage = 2;
+        can_get_level3 = true;
+    }else if(slingShot_level === 3){
+        item.changeImage("slingshot3");
+        roundDamage = 4;
+    }
+}

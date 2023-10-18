@@ -7,6 +7,7 @@ function playSetup() {
         enemyHealth = enemyHMax;
         enemy2Health = enemyHMax;
         enemy3Health = enemyHMax;
+        slingShot_level = 1;
         ammoCount = 5;
         debugMode = false;
 
