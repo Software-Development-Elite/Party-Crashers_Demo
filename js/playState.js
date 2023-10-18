@@ -5,6 +5,8 @@ function playSetup() {
         start_button.remove();
         healthCount = healthMax;
         enemyHealth = enemyHMax;
+        enemy2Health = enemyHMax;
+        enemy3Health = enemyHMax;
         ammoCount = 5;
         debugMode = false;
 
@@ -13,6 +15,7 @@ function playSetup() {
         enemy_setup();
         health_setup();
         detection_setup();
+        gui_setup();
         combatSetup();
     }
 }
@@ -26,6 +29,7 @@ function playDraw() {
         enemy_draw();
         fy_draw();
         collisionDraw();
+        gui_draw();
         preloadDraw();
 
         combatSystem();

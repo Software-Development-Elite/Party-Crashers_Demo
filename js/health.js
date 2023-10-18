@@ -5,6 +5,12 @@ var healthBar;
 var enemyHealth = enemyHMax; 
 var enemyHMax = 5;
 
+var enemy2Health = enemyHMax; 
+var enemy2HMax = 5;
+
+var enemy3Health = enemyHMax; 
+var enemy3HMax = 5;
+
 function health_setup() {
     healthBar = createSprite(player.x, player.y-30, healthCount/3, 7);
     healthBar.visible=false;
@@ -20,7 +26,18 @@ function health_draw() {
         healthCount -= 5;
         healthBar.visible=true;
     }else{
-        healthBar.visible=false;
+        if(frameCount % 200 === 0){
+            healthBar.visible=false;
+        }
+    }
+
+    if(player.isTouching(enemy3)) {
+        healthCount -= 5;
+        healthBar.visible=true;
+    }else{
+        if(frameCount % 200 === 0){
+            healthBar.visible=false;
+        }
     }
 
     if(healthCount > 75){
@@ -49,7 +66,21 @@ function health_draw() {
         enemy.remove();
         enemy_detection.remove();
         enemyKilled += 1;
-        chaseMode = 0;
+        enemy_chaseMode = 0;
+    }
+
+    if(enemy2Health === 0) {
+        enemy2.remove();
+        //enemy2_detection.remove();
+        enemy2Killed += 1;
+        enemy2_chaseMode = 0;
+    }
+
+    if(enemy3Health === 0) {
+        enemy3.remove();
+        //enemy2_detection.remove();
+        enemy3Killed += 1;
+        enemy3_chaseMode = 0;
     }
 }
 

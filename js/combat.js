@@ -2,9 +2,13 @@ var ammo;
 var ammoCount = 5;
 var round;
 var roundGroup;
+var roundDamage = 1;
+
+var tool_type = "Sling Shot";
+var slingShot_level = 1;
 
 var enemyRound;
-var enemyRound_group
+var enemyRound_group;
 
 function combatSetup() {
     roundGroup = createGroup();
@@ -22,9 +26,7 @@ function combatSystem() {
                 round.velocityY = -20;
                 ammoCount -= 1;
             }
-        }
-
-        if(keyDown("left_arrow")) {
+        }else if(keyDown("left_arrow")) {
             side = left;
             if(frameCount % 12 === 0) {
                 round = createSprite(player.x, player.y, 15, 15);
@@ -34,9 +36,7 @@ function combatSystem() {
                 round.velocityX = -20;
                 ammoCount -= 1;
             }
-        }
-
-        if(keyDown("down_arrow")) {
+        }else if(keyDown("down_arrow")) {
             if(frameCount % 12 === 0) {
                 round = createSprite(player.x, player.y, 15, 15);
                 round.addImage(rock_img);
@@ -45,9 +45,7 @@ function combatSystem() {
                 round.velocityY = 20;
                 ammoCount -= 1;
             }
-        }
-
-        if(keyDown("right_arrow")) {
+        }else if(keyDown("right_arrow")) {
             side = right;
             if(frameCount % 12 === 0) {
                 round = createSprite(player.x, player.y, 15, 15);
@@ -70,6 +68,16 @@ function combatSystem() {
         }else if(playerP_state === XL) {
             player.velocityX = 50;
         }
+    }else if(player.isTouching(enemy3)) {
+        if(playerP_state === YU){
+            player.velocityY = 50;
+        }else if(playerP_state === XR) {
+            player.velocityX = -50;
+        }else if(playerP_state === YD) {
+            player.velocityY = -50;
+        }else if(playerP_state === XL) {
+            player.velocityX = 50;
+        }
     }else {
         player.velocityX = 0;
         player.velocityY = 0;
@@ -77,9 +85,23 @@ function combatSystem() {
 
     if(enemy.isTouching(roundGroup)) {
         console.log("logPost");
-        chaseMode = 1;
+        enemy_chaseMode = 1;
         round.remove();
-        enemyHealth -= 1;
+        enemyHealth -= roundDamage;
+    }
+
+    if(enemy2.isTouching(roundGroup)) {
+        console.log("logPost");
+        enemy2_chaseMode = 1;
+        round.remove();
+        enemy2Health -= roundDamage;
+    }
+
+    if(enemy3.isTouching(roundGroup)) {
+        console.log("logPost");
+        enemy3_chaseMode = 1;
+        round.remove();
+        enemy3Health -= roundDamage;
     }
 
     if(player.isTouching(enemyRound_group)) {
@@ -97,8 +119,8 @@ function combatSystem() {
         round.remove();
     }
 
-    if(chaseMode === 1 || chaseMode === 2) {
-        if(frameCount % 20 === 0) {
+    if(enemy_chaseMode === 1 || enemy_chaseMode === 2) {
+        if(frameCount % 160 === 0) {
             if(enemy_position === enemyY1) {
                 enemyRound = createSprite(enemy.x, enemy.y, 10, 10);
                 enemyRound_group.add(enemyRound);

@@ -1,6 +1,9 @@
 var player;
 var player_img;
 
+var previous_playerX = 0;
+var previous_playerY = 0;
+
 var walking = false;
 
 var side = 1;
@@ -23,6 +26,12 @@ function player_setup() {
 function player_draw() {
     camera.x = player.x;
     camera.y = player.y;
+
+    if(frameCount % 2 === 0) {
+        previous_playerX = player.x;
+        previous_playerY = player.y;
+        console.log(previous_playerX, previous_playerY);
+    }
 
     if(side === left) {
         player.changeAnimation("player_idle2");
@@ -56,6 +65,14 @@ function player_draw() {
     if(keyDown("s")) {
         player.y = player.y+5;
         playerP_state = YD;
+
+        if(side === right) {
+            player.changeAnimation("player_down1");
+            player.animation.play();
+        }else if(side === left) {
+            player.changeAnimation("player_down2");
+            player.animation.play();
+        }
     }
 
     if(keyDown("d")) {
