@@ -85,7 +85,21 @@ function health_draw() {
                 level3_sprite.rotationSpeed += 20;
                 level3_available = true;
             }else {
-                console.log("here's leve 3")
+                console.log("here's level 3")
+            }
+        }
+
+        if(wt_can_get_level1 === true) {
+            if(wt_level1_available === false) {
+                wt_level1_sprite.x = enemy.x;
+                wt_level1_sprite.y = enemy.y;
+                wt_level1_sprite.width = 50;
+                wt_level1_sprite.width = 50;
+                wt_level1_sprite.visible = true;
+                wt_level1_sprite.rotationSpeed += 20;
+                wt_level1_available = true;
+            }else {
+                console.log("here's the Water Blaster");
             }
         }
         enemy.remove();
@@ -118,7 +132,21 @@ function health_draw() {
                 level3_sprite.rotationSpeed += 20;
                 level3_available = true;
             }else {
-                console.log("here's leve 3")
+                console.log("here's level 3")
+            }
+        }
+
+        if(wt_can_get_level1 === true) {
+            if(wt_level1_available === false) {
+                wt_level1_sprite.x = enemy2.x;
+                wt_level1_sprite.y = enemy2.y;
+                wt_level1_sprite.width = 50;
+                wt_level1_sprite.width = 50;
+                wt_level1_sprite.visible = true;
+                wt_level1_sprite.rotationSpeed += 20;
+                wt_level1_available = true;
+            }else {
+                console.log("here's the Water Blaster");
             }
         }
         enemy2.remove();
@@ -151,9 +179,25 @@ function health_draw() {
                 level3_sprite.rotationSpeed += 20;
                 level3_available = true;
             }else {
-                console.log("here's leve 3")
+                console.log("here's level 3")
             }
         }
+
+        if(wt_can_get_level1 === true) {
+            if(wt_level1_available === false) {
+                wt_level1_sprite.x = enemy3.x;
+                wt_level1_sprite.y = enemy3.y;
+                wt_level1_sprite.width = 50;
+                wt_level1_sprite.width = 50;
+                wt_level1_sprite.visible = true;
+                wt_level1_sprite.rotationSpeed += 20;
+                wt_level1_available = true;
+            }else {
+                console.log("here's the Water Blaster");
+            }
+        }
+
+        
         enemy3.remove();
         //enemy2_detection.remove();
         enemy3Killed += 1;

@@ -6,7 +6,10 @@ var ghost_img_1, ghost_img_2, ghost_img_3;
 
 var rocks_img, rock_img;
 
+var stream1_img, stream2_img, stream3_img, stream4_img, stream5_img, stream6_img, stream7_img, stream8_img, stream9_img, stream10_img, stream11_img, stream12_img, stream13_img, stream14_img, stream15_img, stream16_img, stream17_img, stream18_img;
+
 var slingShot1_img, slingShot2_img, slingShot3_img;
+var waterTool1_img, waterTool2_img, waterTool3_img;
 
 var level_1;
 
@@ -28,9 +31,34 @@ function preloader() {
     rocks_img = loadImage("js/img/rocks.png");
     rock_img = loadImage("js/img/rock.png");
 
+    stream1_img = loadImage("js/img/water/water_0.png");
+    stream2_img = loadImage("js/img/water/water_1.png");
+    stream3_img = loadImage("js/img/water/water_2.png");
+    stream4_img = loadImage("js/img/water/water_3.png");
+    stream5_img = loadImage("js/img/water/water_4.png");
+    stream6_img = loadImage("js/img/water/water_5.png");
+
+    stream7_img = loadImage("js/img/water/water_6.png");
+    stream8_img = loadImage("js/img/water/water_7.png");
+    stream9_img = loadImage("js/img/water/water_8.png");
+    stream10_img = loadImage("js/img/water/water_9.png");
+    stream11_img = loadImage("js/img/water/water_10.png");
+    stream12_img = loadImage("js/img/water/water_11.png");
+
+    stream13_img = loadImage("js/img/water/water_12.png");
+    stream14_img = loadImage("js/img/water/water_13.png");
+    stream15_img = loadImage("js/img/water/water_14.png");
+    stream16_img = loadImage("js/img/water/water_15.png");
+    stream17_img = loadImage("js/img/water/water_16.png");
+    stream18_img = loadImage("js/img/water/water_17.png");
+
     slingShot1_img = loadImage("js/img/slingShot1.png");
     slingShot2_img = loadImage("js/img/slingShot2.png");
     slingShot3_img = loadImage("js/img/slingShot3.png");
+
+    waterTool1_img = loadImage("js/img/watersoaker.png");
+    waterTool2_img = loadImage("js/img/cidersoaker.png");
+    waterTool3_img = loadImage("js/img/lavasoaker.png");
 
     level_1 = loadImage("js/img/maps/level1.png")
 }
@@ -61,24 +89,49 @@ function preloadSetup() {
 
         item.addImage("slingshot1", slingShot1_img);
         item.addImage("slingshot2", slingShot2_img);
-        item.addImage("slingshot3", slingShot3_img);
+        item.addImage("slingshot3", slingShot3_img); 
+        item.addImage("waterblaster1", waterTool1_img);
+        item.addImage("waterblaster2", waterTool2_img);
+        item.addImage("waterblaster3", waterTool3_img);
 
         level2_sprite.addImage("slingShot2", slingShot2_img);
         level3_sprite.addImage("slingShot3", slingShot3_img);
+
+        wt_level1_sprite.addImage("waterblaster1", waterTool1_img);
+        wt_level2_sprite.addImage("waterblaster1", waterTool2_img);
+        wt_level3_sprite.addImage("waterblaster1", waterTool3_img);
     }
 }
 
 function preloadDraw() {
     console.log(slingShot_level);
-    if(slingShot_level === 1) {
-        item.changeImage("slingshot1");
-        roundDamage = 1;
-    }else if(slingShot_level === 2){
-        item.changeImage("slingshot2");
-        roundDamage = 2;
-        can_get_level3 = true;
-    }else if(slingShot_level === 3){
-        item.changeImage("slingshot3");
-        roundDamage = 4;
+
+    if(tool_type === "Sling Shot") {
+        if(slingShot_level === 1) {
+            item.changeImage("slingshot1");
+            roundDamage = 1;
+        }else if(slingShot_level === 2){
+            item.changeImage("slingshot2");
+            roundDamage = 2;
+            can_get_level3 = true;
+        }else if(slingShot_level === 3){
+            item.changeImage("slingshot3");
+            roundDamage = 4;
+            can_get_waterTool = true;
+        }
+    }
+    if(can_get_waterTool === true) {
+        wt_can_get_level1 = true;
+        if(waterTool_level === 1) {
+            tool_type = "Water Blaster";
+            item.changeImage("waterblaster1");
+            roundDamage = 8;
+        }else if(waterTool_level === 2) {
+            item.changeImage("waterblaster2");
+            roundDamage = 16;
+        }else if(waterTool_level === 3) {
+            item.changeImage("waterblaster3");
+            roundDamage = 32;
+        }
     }
 }

@@ -4,8 +4,15 @@ var round;
 var roundGroup;
 var roundDamage = 1;
 
+var waterTank = 5000;
+var stream1, stream2, stream3, stream_group;
+var waterActive = false;
+var stream1X, stream2X, stream3X;
+var stream1Y, stream2Y, stream3Y;
+
 var tool_type = "Sling Shot";
-var slingShot_level = 3;
+var slingShot_level = 1;
+var waterTool_level = 0;
 
 var enemyRound;
 var enemyRound_group;
@@ -13,52 +20,213 @@ var enemyRound_group;
 function combatSetup() {
     roundGroup = createGroup();
     enemyRound_group = createGroup();
+    stream_group = createGroup();
 }
 
 function combatSystem() {
     //console.log(enemyHealth, enemy2Health, enemy3Health);
-    if(ammoCount > 0) {
-        if(keyDown("up_arrow")) {
-            if(frameCount % 12 === 0) {
-                round = createSprite(player.x, player.y, 15, 15);
-                round.addImage(rock_img);
-                round.setCollider("rectangle", 0, 0, 15, 15);
-                round.rotationSpeed += 16;
-                roundGroup.add(round);
-                round.velocityY = -20;
-                ammoCount -= 1;
+    if(tool_type === "Sling Shot") {
+        if(ammoCount > 0) {
+            if(keyDown("up_arrow")) {
+                if(frameCount % 12 === 0) {
+                    round = createSprite(player.x, player.y, 15, 15);
+                    round.addImage(rock_img);
+                    round.setCollider("rectangle", 0, 0, 15, 15);
+                    round.rotationSpeed += 16;
+                    roundGroup.add(round);
+                    round.velocityY = -20;
+                    ammoCount -= 1;
+                }
+            }else if(keyDown("left_arrow")) {
+                side = left;
+                if(frameCount % 12 === 0) {
+                    round = createSprite(player.x, player.y, 15, 15);
+                    round.addImage(rock_img);
+                    round.setCollider("rectangle", 0, 0, 15, 15);
+                    round.rotationSpeed += 16;
+                    roundGroup.add(round);
+                    round.velocityX = -20;
+                    ammoCount -= 1;
+                }
+            }else if(keyDown("down_arrow")) {
+                if(frameCount % 12 === 0) {
+                    round = createSprite(player.x, player.y, 15, 15);
+                    round.addImage(rock_img);
+                    round.setCollider("rectangle", 0, 0, 15, 15);
+                    round.rotationSpeed += 16;
+                    roundGroup.add(round);
+                    round.velocityY = 20;
+                    ammoCount -= 1;
+                }
+            }else if(keyDown("right_arrow")) {
+                side = right;
+                if(frameCount % 12 === 0) {
+                    round = createSprite(player.x, player.y, 15, 15);
+                    round.addImage(rock_img);
+                    round.setCollider("rectangle", 0, 0, 15, 15);
+                    round.rotationSpeed += 16;
+                    roundGroup.add(round);
+                    round.velocityX = 20;
+                    ammoCount -= 1;
+                }
             }
-        }else if(keyDown("left_arrow")) {
-            side = left;
-            if(frameCount % 12 === 0) {
-                round = createSprite(player.x, player.y, 15, 15);
-                round.addImage(rock_img);
-                round.setCollider("rectangle", 0, 0, 15, 15);
-                round.rotationSpeed += 16;
-                roundGroup.add(round);
-                round.velocityX = -20;
-                ammoCount -= 1;
+        }
+    }else if(tool_type === "Water Blaster") {
+        if(waterTank > 0) {
+            if(keyDown("right_arrow")) {
+                side = right;
+                stream1 = createSprite(player.x+64, player.y, 64, 64);
+                stream2= createSprite(player.x+128, player.y, 64, 64);
+                stream3 = createSprite(player.x+192, player.y, 64, 64);
+
+                stream_group.add(stream1);
+                stream_group.add(stream2);
+                stream_group.add(stream3);
+    
+                stream1.addImage("stream1", stream1_img);
+                stream2.addImage("stream2", stream2_img);
+                stream3.addImage("stream3", stream3_img);
+    
+                waterTank -= 5;
+
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream1);
+                    console.log("removed");
+                }
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream2);
+                    console.log("removed");
+                }
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream3);
+                    console.log("removed");
+                }
+                waterActive = true;
+            }else if(keyDown("left_arrow")) {
+                side = left;
+                stream1 = createSprite(player.x-64, player.y, 64, 64);
+                stream2= createSprite(player.x-128, player.y, 64, 64);
+                stream3 = createSprite(player.x-192, player.y, 64, 64);
+
+                stream_group.add(stream1);
+                stream_group.add(stream2);
+                stream_group.add(stream3);
+    
+                stream1.addImage("stream4", stream4_img);
+                stream2.addImage("stream5", stream5_img);
+                stream3.addImage("stream6", stream6_img);
+    
+                waterTank -= 5;
+
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream1);
+                    console.log("removed");
+                }
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream2);
+                    console.log("removed");
+                }
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream3);
+                    console.log("removed");
+                }
+                waterActive = true;
+            }else if(keyDown("down_arrow")){
+                stream1 = createSprite(player.x, player.y+64, 64, 64);
+                stream2= createSprite(player.x, player.y+128, 64, 64);
+                stream3 = createSprite(player.x, player.y+192, 64, 64);
+
+                stream_group.add(stream1);
+                stream_group.add(stream2);
+                stream_group.add(stream3);
+                if(side === left) {
+                    stream1.addImage("stream7", stream7_img);
+                    stream2.addImage("stream8", stream8_img);
+                    stream3.addImage("stream9", stream9_img);
+                }else if(side === right) {
+                    stream1.addImage("stream10", stream10_img);
+                    stream2.addImage("stream11", stream11_img);
+                    stream3.addImage("stream12", stream12_img);
+                }
+
+                waterTank -= 5;
+
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream1);
+                    console.log("removed");
+                }
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream2);
+                    console.log("removed");
+                }
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream3);
+                    console.log("removed");
+                }
+                waterActive = true;
+            }else if(keyDown("up_arrow")){
+                stream1 = createSprite(player.x, player.y-64, 64, 64);
+                stream2= createSprite(player.x, player.y-128, 64, 64);
+                stream3 = createSprite(player.x, player.y-192, 64, 64);
+
+                stream_group.add(stream1);
+                stream_group.add(stream2);
+                stream_group.add(stream3);
+                if(side === left) {
+                    stream1.addImage("stream13", stream13_img);
+                    stream2.addImage("stream14", stream14_img);
+                    stream3.addImage("stream15", stream15_img);
+                }else if(side === right) {
+                    stream1.addImage("stream16", stream16_img);
+                    stream2.addImage("stream17", stream17_img);
+                    stream3.addImage("stream18", stream18_img);
+                }
+
+                waterTank -= 5;
+
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream1);
+                    console.log("removed");
+                }
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream2);
+                    console.log("removed");
+                }
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream3);
+                    console.log("removed");
+                }
+                waterActive = true;
+            }else {
+                if(waterActive === true) {
+                    if(frameCount % 10 === 0) {
+                        stream_group.destroyEach(stream1);
+                        console.log("removed");
+                    }
+                    if(frameCount % 15 === 0) {
+                        stream_group.destroyEach(stream2);
+                        console.log("removed");
+                    }
+                    if(frameCount % 20 === 0) {
+                        stream_group.destroyEach(stream3);
+                        console.log("removed");
+                    }
+                }
             }
-        }else if(keyDown("down_arrow")) {
-            if(frameCount % 12 === 0) {
-                round = createSprite(player.x, player.y, 15, 15);
-                round.addImage(rock_img);
-                round.setCollider("rectangle", 0, 0, 15, 15);
-                round.rotationSpeed += 16;
-                roundGroup.add(round);
-                round.velocityY = 20;
-                ammoCount -= 1;
-            }
-        }else if(keyDown("right_arrow")) {
-            side = right;
-            if(frameCount % 12 === 0) {
-                round = createSprite(player.x, player.y, 15, 15);
-                round.addImage(rock_img);
-                round.setCollider("rectangle", 0, 0, 15, 15);
-                round.rotationSpeed += 16;
-                roundGroup.add(round);
-                round.velocityX = 20;
-                ammoCount -= 1;
+        }else {
+            if(waterActive === true) {
+                if(frameCount % 10 === 0) {
+                    stream_group.destroyEach(stream1);
+                    console.log("removed");
+                }
+                if(frameCount % 15 === 0) {
+                    stream_group.destroyEach(stream2);
+                    console.log("removed");
+                }
+                if(frameCount % 20 === 0) {
+                    stream_group.destroyEach(stream3);
+                    console.log("removed");
+                }
             }
         }
     }

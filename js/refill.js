@@ -3,11 +3,25 @@ var rock_pile2;
 var rock_pile3;
 var rock_pile4;
 var rock_pile5;
+
 var level2_sprite;
 var level3_sprite;
 var level2_available = false;
 var can_get_level3 = false;
 var level3_available = false;
+
+var can_get_waterTool = false;
+var wt_can_get_level1 = false;
+var wt_level1_available = false;
+var wt_level1_sprite;
+var wt_can_get_level2 = false;
+var wt_level2_available = false;
+var wt_level2_sprite;
+var wt_can_get_level3 = false;
+var wt_level3_available = false;
+var wt_level3_sprite;
+
+var can_get
 
 function refill_setup() {
     rock_pile = createSprite(300, 215, 20, 20);
@@ -30,6 +44,15 @@ function refill_setup() {
 
     level3_sprite = createSprite(0,0,1,1);
     level3_sprite.visible = false;
+
+    wt_level1_sprite = createSprite(0,0,1,1);
+    wt_level1_sprite.visible = false;
+
+    wt_level2_sprite = createSprite(0,0,1,1);
+    wt_level2_sprite.visible = false;
+
+    wt_level3_sprite = createSprite(0,0,1,1);
+    wt_level3_sprite.visible = false;
 }
 
 function refill_system() {
@@ -69,6 +92,18 @@ function refill_system() {
         if(player.isTouching(level3_sprite)) {
             level3_sprite.remove();
             slingShot_level = 3;
+        }
+    }
+
+    if(can_get_waterTool === true) {
+        //tool_type = "Water Blaster";
+    }
+
+    if(wt_level1_available === true) {
+        if(player.isTouching(wt_level1_sprite)) {
+            wt_level1_sprite.remove();
+            tool_type = "Water Blaster";
+            waterTool_level = 1;
         }
     }
 }
