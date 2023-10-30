@@ -11,6 +11,12 @@ var enemy2HMax = 5;
 var enemy3Health = 5; 
 var enemy3HMax = 5;
 
+var enemy4Health = 10; 
+var enemy4HMax = 10;
+
+var enemy5Health = 10; 
+var enemy5HMax = 10;
+
 function health_setup() {
     healthBar = createSprite(player.x, player.y-30, healthCount/3, 7);
     healthBar.visible=false;
@@ -248,6 +254,128 @@ function health_draw() {
         enemy3_chaseMode = 0;
         enemy3Health = "none";
     }
+
+    if(enemy4Health === 0) {
+        if(level2_available === false){
+            level2_sprite.x = enemy4.x;
+            level2_sprite.y = enemy4.y;
+            level2_sprite.width = 50;
+            level2_sprite.width = 50;
+            level2_sprite.visible = true;
+            level2_sprite.rotationSpeed += 20;
+            level2_available = true;
+        }else {
+            console.log("here's level 2");
+        }
+
+        if(can_get_level3 === true) {
+            if(level3_available === false) {
+                level3_sprite.x = enemy4.x;
+                level3_sprite.y = enemy4.y;
+                level3_sprite.width = 50;
+                level3_sprite.width = 50;
+                level3_sprite.visible = true;
+                level3_sprite.rotationSpeed += 20;
+                level3_available = true;
+            }else {
+                console.log("here's level 3")
+            }
+        }
+
+        if(wt_can_get_level1 === true) {
+            if(wt_level1_available === false) {
+                wt_level1_sprite.x = enemy4.x;
+                wt_level1_sprite.y = enemy4.y;
+                wt_level1_sprite.width = 50;
+                wt_level1_sprite.width = 50;
+                wt_level1_sprite.visible = true;
+                wt_level1_sprite.rotationSpeed += 20;
+                wt_level1_available = true;
+            }else {
+                console.log("here's the Water Blaster");
+            }
+        }
+
+        if(tool_type === "Water Blaster") {
+            can_get_nothing3 = true;
+        }
+
+        if(sceneState === 1) {
+            fy_next_level3 = true;
+        }else if(sceneState === 2) {
+            f1_next_level1 = true;
+            f1_next_level2 = true;
+            f1_next_level3 = true;
+        }
+        
+        enemy4.remove();
+        //enemy2_detection.remove();
+        enemy4Killed += 1;
+        enemy4_chaseMode = 0;
+        enemy4Health = "none";
+    }
+
+    if(enemy4Health === 0) {
+        if(level2_available === false){
+            level2_sprite.x = enemy5.x;
+            level2_sprite.y = enemy5.y;
+            level2_sprite.width = 50;
+            level2_sprite.width = 50;
+            level2_sprite.visible = true;
+            level2_sprite.rotationSpeed += 20;
+            level2_available = true;
+        }else {
+            console.log("here's level 2");
+        }
+
+        if(can_get_level3 === true) {
+            if(level3_available === false) {
+                level3_sprite.x = enemy5.x;
+                level3_sprite.y = enemy5.y;
+                level3_sprite.width = 50;
+                level3_sprite.width = 50;
+                level3_sprite.visible = true;
+                level3_sprite.rotationSpeed += 20;
+                level3_available = true;
+            }else {
+                console.log("here's level 3")
+            }
+        }
+
+        if(wt_can_get_level1 === true) {
+            if(wt_level1_available === false) {
+                wt_level1_sprite.x = enemy5.x;
+                wt_level1_sprite.y = enemy5.y;
+                wt_level1_sprite.width = 50;
+                wt_level1_sprite.width = 50;
+                wt_level1_sprite.visible = true;
+                wt_level1_sprite.rotationSpeed += 20;
+                wt_level1_available = true;
+            }else {
+                console.log("here's the Water Blaster");
+            }
+        }
+
+        if(tool_type === "Water Blaster") {
+            can_get_nothing3 = true;
+        }
+
+        if(sceneState === 1) {
+            fy_next_level3 = true;
+        }else if(sceneState === 2) {
+            f1_next_level1 = true;
+            f1_next_level2 = true;
+            f1_next_level3 = true;
+        }
+        
+        enemy5.remove();
+        //enemy2_detection.remove();
+        enemy5Killed += 1;
+       // enemy5_chaseMode = 0;
+        enemy5Health = "none";
+    }
+
+    console.log(enemy4Health);
 }
 
 console.log("health.js is working");

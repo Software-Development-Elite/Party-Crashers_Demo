@@ -4,6 +4,8 @@ var rock_pile3;
 var rock_pile4;
 var rock_pile5;
 
+var cup = [0, 0, 0];
+
 var level2_sprite;
 var level3_sprite;
 var level2_available = false;
@@ -50,6 +52,10 @@ function refill_setup() {
 
         rock_pile5 = createSprite(467, 245, 20, 20);
         rock_pile5.shapeColor = ("gray");
+    }else if(sceneState === level2) {
+        cup[0] = createSprite(200, 200, 50, 50);
+        cup[1] = createSprite(300, 215, 50, 50);
+        cup[2] = createSprite(445, 105, 20, 20);
     }
 
     level2_sprite = createSprite(0,0,1,1);
@@ -101,6 +107,23 @@ function refill_system() {
     if(player.isTouching(rock_pile5)) {
         ammoCount = ammoCount + 5;
         rock_pile5.remove()
+    }
+
+    if(sceneState === level2) {
+         if(player.isTouching(cup[0])){
+            waterTank += 120;
+            cup[0].destroy();
+         }
+
+         if(player.isTouching(cup[1])){
+            waterTank += 120;
+            cup[1].destroy();
+         }
+
+         if(player.isTouching(cup[2])){
+            waterTank += 120;
+            cup[2].destroy();
+         }
     }
 
     if(level2_available === true) {

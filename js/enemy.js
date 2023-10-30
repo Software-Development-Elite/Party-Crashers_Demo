@@ -78,6 +78,9 @@ var enemy5_speed = 1;
 var enemy5Count = 1;
 var enemy5Killed = 0;
 var enemy5_chaseMode = 0;
+var enemy5Side = 1;
+var enemy5Left = 1;
+var enemy5Right = 2;
 
 
 
@@ -107,13 +110,18 @@ function enemy_setup() {
         enemy3.shapeColor = ("yellow");
         enemy3.setCollider("rectangle", 0, 0, 25, 25);
         enemy3.friction = enemy_friction;
-        enemy3.rotationSpeed
 
   // enemy.attractionPoint(1, player.position.x, player.position.y);
     }
 
     if(sceneState === 2) {
-        
+        enemy4 = createSprite(200,200,25,25);
+        enemy4.friction = enemy_friction;
+
+        enemy5 = createSprite(150,200,25,25);
+        enemy5.shapeColor = ("yellow");
+        enemy5.setCollider("rectangle", 0, 0, 25, 25);
+        enemy5.friction = enemy_friction;
     }
 }
 
@@ -154,6 +162,20 @@ function enemy_draw() {
             console.log(enemy3Killed);
         }
 
+        if(enemy4Killed > enemy4Count) {
+            enemy4Killed = enemy4Count;
+        //scoringSystem();
+        }else if(enemy4Killed <= enemy4Count) {
+            console.log(enemy4Killed);
+        }
+
+        if(enemy5Killed > enemy5Count) {
+            enemy5Killed = enemy5Count;
+        //scoringSystem();
+        }else if(enemy5Killed <= enemy5Count) {
+            console.log(enemy5Killed);
+        }
+
         console.log(score);
 
         if(enemy_chaseMode === 1) {
@@ -165,6 +187,30 @@ function enemy_draw() {
 
         if(frameCount % 300 === 0) {
             enemy3.attractionPoint(enemy_speed*125, previous_playerX, previous_playerY);
+        }
+    }else if(sceneState === 2) {
+        enemy4.attractionPoint(enemy_speed*2.5, player.position.x, player.position.y);
+
+        if(enemy4.velocityY < 0 && enemy4.velocityY < enemy4.velocityX) {
+            enemy_position = enemyY1;
+        }else if(enemy4.velocityY > 0 && enemy4.velocityY > enemy4.velocityX) {
+            enemy_position = enemyY2;
+        }else if(enemy4.velocityX < 0 && enemy4.velocityX < enemy4.velocityY) {
+            enemy_position = enemyX1;
+        }else if(enemy4.velocityX > 0 && enemy4.velocityX > enemy4.velocityY) {
+            enemy_position = enemyX2;
+        }
+
+        enemy5.attractionPoint(enemy_speed, player.position.x, player.position.y);
+
+        if(player.x > enemy5.x) {
+            enemy5.changeImage("no face 1");
+        }else if(player.x < enemy5.x) {
+            enemy5.changeImage("no face 2");
+        }
+
+        if(frameCount % 300 === 0) {
+            enemy5.attractionPoint(enemy_speed*200, previous_playerX, previous_playerY);
         }
     }
 

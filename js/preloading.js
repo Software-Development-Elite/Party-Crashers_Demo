@@ -1,11 +1,15 @@
+var titleScreen;
 var player_img;
 var player_idle1, player_idle2
 var player_walk1, player_walk2, player_walk_up1, player_walk_up2, player_walk_down1, player_walk_down2;
 
 var ghost_img_1, ghost_img_2, ghost_img_3;
 var ghost_moving;
+var space_ghost;
+var noFace1, noFace2;
 
 var rocks_img, rock_img;
+var cup_img;
 
 var stream1_img, stream2_img, stream3_img, stream4_img, stream5_img, stream6_img, stream7_img, stream8_img, stream9_img, stream10_img, stream11_img, stream12_img, stream13_img, stream14_img, stream15_img, stream16_img, stream17_img, stream18_img;
 
@@ -16,9 +20,16 @@ var nothing1_img, nothing2_img, nothing3_img;
 var npcSprite_1, npcSprite_2;
 var kitchen_decor1, kitchen_decor2, kitchen_decor3;
 
+var pumpkinImg = [0,0,0];
+
 var level_0, level_1, level_2;
 
+var michael_idle, michael_walk1, michael_walk2, michael_walk3, michael_walk3, michael_walk4, michael_windup1, michael_windup2, michael_w_still1, michael_w_still2, michael_attack_left, michael_attack_right, michael_sweep_right, michael_sweep_left;
+
+var bossMusic;
+
 function preloader() {
+    titleScreen = loadImage("js/img/titlescreen.png")
     player_idle1 = loadAnimation("js/img/player/idle1/playerIdle00.png","js/img/player/idle1/playerIdle01.png","js/img/player/idle1/playerIdle02.png","js/img/player/idle1/playerIdle03.png","js/img/player/idle1/playerIdle04.png","js/img/player/idle1/playerIdle05.png","js/img/player/idle1/playerIdle06.png","js/img/player/idle1/playerIdle07.png","js/img/player/idle1/playerIdle08.png","js/img/player/idle1/playerIdle09.png","js/img/player/idle1/playerIdle10.png","js/img/player/idle1/playerIdle11.png",);
     player_idle2 = loadAnimation("js/img/player/idle2/playerIdle00.png","js/img/player/idle2/playerIdle01.png","js/img/player/idle2/playerIdle02.png","js/img/player/idle2/playerIdle03.png","js/img/player/idle2/playerIdle04.png","js/img/player/idle2/playerIdle05.png","js/img/player/idle2/playerIdle06.png","js/img/player/idle2/playerIdle07.png","js/img/player/idle2/playerIdle08.png","js/img/player/idle2/playerIdle09.png","js/img/player/idle2/playerIdle10.png","js/img/player/idle2/playerIdle11.png",);
 
@@ -33,10 +44,17 @@ function preloader() {
     ghost_img_2 = loadImage("js/img/ghost2.png");
     ghost_img_3 = loadImage("js/img/ghost3.png");
 
+    space_ghost = loadImage("js/img/costume_party/reference.png");
+
+    noFace1 = loadImage("js/img/costume_party/bestFilm1.png");
+    noFace2 = loadImage("js/img/costume_party/bestFilm2.png")
+
     ghost_moving = loadAnimation("js/img/ghosts/ghost1/ghost1.png", "js/img/ghosts/ghost1/ghost2.png", "js/img/ghosts/ghost1/ghost3.png", "js/img/ghosts/ghost1/ghost4.png", "js/img/ghosts/ghost1/ghost5.png", "js/img/ghosts/ghost1/ghost6.png", "js/img/ghosts/ghost1/ghost7.png", "js/img/ghosts/ghost1/ghost8.png", "js/img/ghosts/ghost1/ghost9.png")
 
     rocks_img = loadImage("js/img/rocks.png");
     rock_img = loadImage("js/img/rock.png");
+
+    cup_img = loadImage("js/img/cup.png");
 
     stream1_img = loadImage("js/img/water/water_0.png");
     stream2_img = loadImage("js/img/water/water_1.png");
@@ -81,6 +99,26 @@ function preloader() {
     kitchen_decor1 = loadImage("js/img/decor/kitchen/sprite_3.png");
     kitchen_decor2 = loadImage("js/img/decor/kitchen/sprite_0.png");
     kitchen_decor3 = loadImage("js/img/decor/kitchen/sprite_1.png");
+
+    pumpkinImg[0] = loadImage("js/img/decor/sprite_07.png");
+    pumpkinImg[1] = loadImage("js/img/decor/sprite_08.png");
+    pumpkinImg[2] = loadImage("js/img/decor/sprite_09.png");
+
+    michael_idle = loadAnimation("js/img/Brosky/idle/broskyidle00.png", "js/img/Brosky/idle/broskyidle01.png", "js/img/Brosky/idle/broskyidle02.png", "js/img/Brosky/idle/broskyidle03.png", "js/img/Brosky/idle/broskyidle04.png", "js/img/Brosky/idle/broskyidle05.png", "js/img/Brosky/idle/broskyidle06.png", "js/img/Brosky/idle/broskyidle07.png", "js/img/Brosky/idle/broskyidle08.png", "js/img/Brosky/idle/broskyidle09.png", "js/img/Brosky/idle/broskyidle10.png", "js/img/Brosky/idle/broskyidle11.png", "js/img/Brosky/idle/broskyidle12.png", "js/img/Brosky/idle/broskyidle13.png", "js/img/Brosky/idle/broskyidle14.png", "js/img/Brosky/idle/broskyidle16.png", "js/img/Brosky/idle/broskyidle17.png", "js/img/Brosky/idle/broskyidle18.png", "js/img/Brosky/idle/broskyidle19.png");
+    michael_walk1 = loadAnimation("js/img/Brosky/walk_1/broskywalkforward0.png", "js/img/Brosky/walk_1/broskywalkforward1.png", "js/img/Brosky/walk_1/broskywalkforward2.png", "js/img/Brosky/walk_1/broskywalkforward3.png", "js/img/Brosky/walk_1/broskywalkforward4.png");
+    michael_walk2 = loadAnimation("js/img/Brosky/walk_2/broskywalkforward0.png", "js/img/Brosky/walk_2/broskywalkforward1.png", "js/img/Brosky/walk_2/broskywalkforward2.png", "js/img/Brosky/walk_2/broskywalkforward3.png", "js/img/Brosky/walk_2/broskywalkforward4.png");
+    michael_walk3 = loadAnimation("js/img/Brosky/walk_3/BroskyWalkUp0.png", "js/img/Brosky/walk_3/BroskyWalkUp1.png", "js/img/Brosky/walk_3/BroskyWalkUp2.png", "js/img/Brosky/walk_3/BroskyWalkUp3.png", "js/img/Brosky/walk_3/BroskyWalkUp4.png", "js/img/Brosky/walk_3/BroskyWalkUp5.png", "js/img/Brosky/walk_3/BroskyWalkUp6.png", "js/img/Brosky/walk_3/BroskyWalkUp7.png");
+    michael_walk4 = loadAnimation("js/img/Brosky/walk_4/BroskyWalkDown0.png", "js/img/Brosky/walk_4/BroskyWalkDown1.png", "js/img/Brosky/walk_4/BroskyWalkDown2.png", "js/img/Brosky/walk_4/BroskyWalkDown3.png", "js/img/Brosky/walk_4/BroskyWalkDown4.png", "js/img/Brosky/walk_4/BroskyWalkDown5.png", "js/img/Brosky/walk_4/BroskyWalkDown6.png", "js/img/Brosky/walk_4/BroskyWalkDown7.png")
+    michael_windup1 = loadAnimation("js/img/Brosky/windup1/windup1_0.png", "js/img/Brosky/windup1/windup1_1.png", "js/img/Brosky/windup1/windup1_2.png");
+    michael_windup2 = loadAnimation("js/img/Brosky/windup2/windup2_0.png", "js/img/Brosky/windup2/windup2_1.png", "js/img/Brosky/windup2/windup2_2.png");
+    michael_attack_left = loadAnimation("js/img/Brosky/yoyo1/yoyo1_00.png", "js/img/Brosky/yoyo1/yoyo1_01.png", "js/img/Brosky/yoyo1/yoyo1_02.png", "js/img/Brosky/yoyo1/yoyo1_03.png", "js/img/Brosky/yoyo1/yoyo1_04.png", "js/img/Brosky/yoyo1/yoyo1_05.png", "js/img/Brosky/yoyo1/yoyo1_06.png", "js/img/Brosky/yoyo1/yoyo1_07.png", "js/img/Brosky/yoyo1/yoyo1_08.png", "js/img/Brosky/yoyo1/yoyo1_09.png", "js/img/Brosky/yoyo1/yoyo1_10.png");
+    michael_attack_right = loadAnimation("js/img/Brosky/yoyo1/yoyo1_00.png", "js/img/Brosky/yoyo1/yoyo1_01.png", "js/img/Brosky/yoyo1/yoyo1_02.png", "js/img/Brosky/yoyo1/yoyo1_03.png", "js/img/Brosky/yoyo1/yoyo1_04.png", "js/img/Brosky/yoyo1/yoyo1_05.png", "js/img/Brosky/yoyo1/yoyo1_06.png", "js/img/Brosky/yoyo1/yoyo1_07.png", "js/img/Brosky/yoyo1/yoyo1_08.png", "js/img/Brosky/yoyo1/yoyo1_09.png", "js/img/Brosky/yoyo1/yoyo1_10.png");
+    michael_sweep_left = loadAnimation("js/img/Brosky/upKick1/upKick1_0.png", "js/img/Brosky/upKick1/upKick1_1.png", "js/img/Brosky/upKick1/upKick1_2.png", "js/img/Brosky/upKick1/upKick1_3.png", "js/img/Brosky/upKick1/upKick1_4.png", "js/img/Brosky/upKick1/upKick1_5.png", "js/img/Brosky/upKick1/upKick1_6.png", "js/img/Brosky/upKick1/upKick1_7.png", "js/img/Brosky/upKick1/upKick1_8.png", "js/img/Brosky/upKick1/upKick1_9.png");      
+    michael_sweep_right = loadAnimation("js/img/Brosky/upKick2/upKick2_00.png", "js/img/Brosky/upKick2/upKick2_01.png", "js/img/Brosky/upKick2/upKick2_02.png", "js/img/Brosky/upKick2/upKick2_03.png", "js/img/Brosky/upKick2/upKick2_04.png", "js/img/Brosky/upKick2/upKick2_05.png", "js/img/Brosky/upKick2/upKick2_06.png", "js/img/Brosky/upKick2/upKick2_07.png", "js/img/Brosky/upKick2/upKick2_08.png", "js/img/Brosky/upKick2/upKick2_09.png");
+    michael_w_still1 = loadImage("js/img/Brosky/windup1/windup1_2.png");
+    michael_w_still2 = loadImage("js/img/Brosky/windup2/windup2_2.png");
+
+    bossMusic = loadSound("js/music/Boss.mp3");
 }
 
 function preloadSetup() {
@@ -132,12 +170,42 @@ function preloadSetup() {
         wt_level3_sprite.addImage("waterblaster1", waterTool3_img);
 
         worstfont.addImage("sans", npcSprite_1);
+
+        if(sceneState === 1) {
+            pumpkins[0].addImage("pumpkin1", pumpkinImg[0]);
+            pumpkins[1].addImage("pumpkin2", pumpkinImg[1]);
+            pumpkins[2].addImage("pumpkin3", pumpkinImg[2]);
+        }
         
         if(sceneState === 2) {
             noor.addImage("Morshu", npcSprite_2);
+            enemy4.addImage("Space Ghost", space_ghost);
+            enemy5.addImage("no face 1", noFace1);
+            enemy5.addImage("no face 2", noFace2);
             kitchen1.addImage("kitchenDecor", kitchen_decor1);
             kitchen2.addImage("kitchenDecor", kitchen_decor2);
             kitchen3.addImage("kitchenDecor", kitchen_decor3);
+
+            cup[0].addImage("cup", cup_img);
+            cup[1].addImage("cup", cup_img);
+            cup[2].addImage("cup", cup_img);
+        }
+
+        if(sceneState === level3) {
+            bossMusic.loop();
+            michael.addAnimation("idle", michael_idle);
+            michael.addAnimation("walk1", michael_walk1);
+            michael.addAnimation("walk2", michael_walk2);
+            michael.addAnimation("walk3", michael_walk3);
+            michael.addAnimation("walk4", michael_walk4);
+            michael.addAnimation("windup1", michael_windup1);
+            michael.addAnimation("windup2", michael_windup2);
+            michael.addAnimation("left attack", michael_attack_left);
+            michael.addAnimation("right attack", michael_attack_right);
+            michael.addAnimation("left windup", michael_sweep_left);
+            michael.addAnimation("right windup", michael_sweep_right);
+            michael.addImage("windup_still1", michael_w_still1);
+            michael.addImage("windup_still2", michael_w_still2);
         }
     }
 }
@@ -173,4 +241,20 @@ function preloadDraw() {
             roundDamage = 32;
         }
     }
+
+    // if(sceneState === 3) {
+    //     if(michaelState === idle) {
+    //         michael.changeAnimation("idle");
+    //     }else if(michaelState === walking) {
+    //         if(michaelPosition === michaelYD) {
+    //             michael.changeAnimation("walk4");
+    //         }else if(michaelPosition === michaelYU) {
+    //             michael.changeAnimation("walk3");
+    //         }else if(michaelPosition === michaelXL) {
+    //             michael.changeAnimation("walk1");
+    //         }else if(michaelPosition === michaelXR) {
+    //             michael.changeAnimation("walk2");
+    //         }
+    //     }
+    // }
 }

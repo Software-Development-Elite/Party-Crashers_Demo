@@ -3,9 +3,6 @@ var gameOver = 2;
 function gameoverDraw() {
     if(gameState === gameOver) {
         healthCount = healthMax;
-        enemyHealth = 5;
-        enemy2Health = 5;
-        enemy3Health = 5;
         tool_type = "Sling Shot"
         slingShot_level = 1;
         waterTool_level = 0;
@@ -21,6 +18,8 @@ function gameoverDraw() {
         wt_level1_available = false;
         wt_level2_available = false;
         wt_level3_available = false;
+        bossMusic.stop();
+        
 
         player.destroy();
         enemy.destroy();
@@ -41,16 +40,24 @@ function gameoverDraw() {
         nothing_level1_sprite.destroy();
         nothing_level2_sprite.destroy();
         nothing_level3_sprite.destroy();
+        stream_group.destroyEach();
+        fy_next_level1 = false;
+        fy_next_level2 = false;
+        fy_next_level3 = false;
+        f1_next_level1 = false;
+        f1_next_level2 = false;
+        f1_next_level3 = false;
 
         if(sceneState === 1) {
             front_yard_map.destroy();
             fy_transistion.destroy();
             worstfont.destroy();
             font_group.destroyEach();
-            fy_top.destroy();
-            fy_left.destroy();
-            fy_right.destroy();
-            fy_bottom.destroy();
+            pumpkins[0].destroy();
+            pumpkins[1].destroy();
+            pumpkins[2].destroy();
+            fy_edges.destroyEach();
+            fy_walls.destroyEach();
             rock_pile.destroy();
             rock_pile2.destroy();
             rock_pile3.destroy();
@@ -60,20 +67,27 @@ function gameoverDraw() {
 
         if(sceneState === 2) {
             first_floor_map.destroy();
-            f1_top.destroy();
-            f1_left.destroy();
-            f1_right.destroy();
-            f1_bottom.destroy();
-            f1_wall1.destroy();
-            f1_wall2.destroy();
-            f1_wall3.destroy();
-            f1_wall4.destroy();
-            rock_pile.destroy();
-            rock_pile2.destroy();
-            rock_pile3.destroy();
-            rock_pile4.destroy();
-            rock_pile5.destroy();
+            f1_transistion.destroy();
+            enemy4.destroy();
+            enemy5.destroy();
+            noor.destroy();
+            kitchen1.destroy();
+            kitchen2.destroy();
+            kitchen3.destroy();
+            f1_edges.destroyEach();
+            f1_walls.destroyEach();
+            cup[0].destroy();
+            cup[1].destroy();
+            cup[2].destroy();
             
+        }
+
+        if(sceneState === 3) {
+            second_floor_map.destroy();
+            f2_edges.destroyEach();
+            michael.destroy();
+            mikes_rocks_group.destroyEach();
+            michaelHealthBar.destroy();
         }
 
         localStorage.setItem("previous1stScore", highscore1);
@@ -83,9 +97,9 @@ function gameoverDraw() {
         localStorage.setItem("score", score);
         newScore = localStorage.getItem("score");
 
-        if(newScore > highscore1) {
+        if(score > prevScore1) {
             highscore1 = newScore;
-            if(prevScore1 > highscore2) {
+            if(prevScore1 > prevScore2) {
                 highscore2 = prevScore1;
 
                 if(prevScore2 > highscore3) {
@@ -95,14 +109,14 @@ function gameoverDraw() {
             localStorage.setItem("1st place", highscore1);
             localStorage.setItem("2nd place", highscore2);
             localStorage.setItem("3rd place", highscore3);
-        }else if(newScore > highscore2) {
+        }else if(score > prevScore2) {
             highscore2 = newScore;
             if(prevScore2 > highscore3) {
                 highscore3 = prevScore2;
             }
             localStorage.setItem("2nd place", highscore2);
             localStorage.setItem("3rd place", highscore3);
-        }else if(newScore > highscore3) {
+        }else if(score > highscore3) {
             highscore3 = newScore;
             localStorage.setItem("3rd place", highscore3);
         }
@@ -110,6 +124,19 @@ function gameoverDraw() {
         gameState = menuState;
         sceneState = level1;
         score = 0;
+        enemyHealth = 5;
+        enemy2Health = 5;
+        enemy3Health = 5;
+        enemy4Health = 10;
+        enemy5Health = 10
+        michaelHealth = 500;
+        sansHealth1 = 5;
+        sansHealth2 = 5;
+        sansHealth3 = 5;
+        noorHealth = 2;
+        kit1Health = 1;
+        kit2Health = 1;
+        kit3Health = 1;
         setup();
         redraw();
     }

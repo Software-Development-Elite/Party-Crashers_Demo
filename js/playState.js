@@ -9,6 +9,7 @@ function playSetup() {
         detection_setup();
         gui_setup();
         combatSetup();
+        michaelSetup();
     }
 }
 
@@ -22,6 +23,7 @@ function playDraw() {
         fy_draw();
         collisionDraw();
         gui_draw();
+        michaelDraw();
         preloadDraw();
 
         combatSystem();

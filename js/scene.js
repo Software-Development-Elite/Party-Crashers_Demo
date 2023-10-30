@@ -16,6 +16,13 @@ var fy_next_level3 = false;
 var worstfont;
 var font_bullets;
 var font_group;
+var sansHealth1 = 5;
+var sansHealth2 = 5
+var sansHealth3 = 5;;
+var sansScores = [0,0,0];
+var pumpkinHealth = [1, 1, 1];
+var pumpkins = [0,0,0];
+var pumpkinScore = [0,0,0];
 
 var first_floor_map;
 var f1_top, f1_left, f1_right, f1_bottom;
@@ -27,6 +34,11 @@ var f1_next_level2 = false;
 var f1_next_level3 = false;
 var noor;
 var kitchen1, kitchen2, kitchen3;
+var noorHealth = 2;
+var kit1Health = 1;
+var kit2Health = 1;
+var kit3Health = 1;
+var level2Scores = [0, 0, 0, 0];
 
 var second_floor_map;
 var f2_top, f2_left, f2_right, f2_bottom;
@@ -48,6 +60,10 @@ function front_yard() {
         fy_transistion.visible = false;
 
         worstfont = createSprite(600, 345, 50, 50);
+
+        pumpkins[0] = createSprite(515, 75, 50, 50);
+        pumpkins[1] = createSprite(579, 75, 50, 50);
+        pumpkins[2] = createSprite(643, 75, 50, 50);
 
         fy_top = createSprite(front_yard_map.x, front_yard_map.y-300, front_yard_map.width, 10);
         fy_top.visible=false;
@@ -183,6 +199,97 @@ function fy_draw() {
             healthCount -= 2;
         }
 
+        if(enemy.x > front_yard_map.x && enemy.x < front_yard_map.x && enemy.y > front_yard_map.y && enemyk.y < front_yard_map.y) {
+            enemy.x = 200;
+            enemy.y = 200;
+        }
+
+        if(enemy2.x > front_yard_map.x && enemy2.x < front_yard_map.x && enemy2.y > front_yard_map.y && enemy2.y < front_yard_map.y) {
+            enemy2.x = 200;
+            enemy2.y = 200;
+        }
+
+        if(enemy3.x > front_yard_map.x && enemy2.x < front_yard_map.x && enemy2.y > front_yard_map.y && enemy2.y < front_yard_map.y) {
+            enemy3.x = 200;
+            enemy3.y = 200;
+        }
+
+        if(worstfont.isTouching(roundGroup)) {
+            if(sansHealth1 > 0) {
+                sansHealth1 -= 1;
+            }else if(sansHealth2 > 0) {
+                sansHealth2 -= 1;
+            }else if(sansHealth3 > 0) {
+                sansHealth3 -= 1;
+            }
+
+            roundGroup.destroyEach();
+        }
+
+        if(worstfont.isTouching(stream_group)) {
+            if(sansHealth1 > 0) {
+                sansHealth1 -= 1;
+            }else if(sansHealth2 > 0) {
+                sansHealth2 -= 1;
+            }else if(sansHealth3 > 0) {
+                sansHealth3 -= 1;
+            }
+        }
+
+        if(pumpkins[0].isTouching(roundGroup)) {
+            pumpkinHealth[0] -= 1;
+            roundGroup.destroyEach();
+        }
+
+        if(pumpkins[1].isTouching(roundGroup)) {
+            pumpkinHealth[1] -= 1;
+            roundGroup.destroyEach();
+        }
+
+        if(pumpkins[2].isTouching(roundGroup)) {
+            pumpkinHealth[2] -= 1;
+            roundGroup.destroyEach();
+        }
+
+        if(pumpkins[0].isTouching(stream_group)) {
+            pumpkinHealth[0] -= 0.1
+        }
+
+        if(pumpkins[1].isTouching(stream_group)) {
+            pumpkinHealth[1] -= 0.1
+        }
+
+        if(pumpkins[2].isTouching(stream_group)) {
+            pumpkinHealth[2] -= 0.1
+        }
+
+        if(sansHealth1 <= 0) {
+            sansScores[0] = 3;
+        }
+
+        if(sansHealth2 <= 0) {
+            sansScores[1] = 3;
+        }
+
+        if(sansHealth3 <= 0) {
+            sansScores[2] = 3;
+        }
+
+        if(pumpkinHealth[0] <= 0) {
+            pumpkins[0].destroy();
+            pumpkinScore[0] = 5;
+        }
+
+        if(pumpkinHealth[1] <= 0) {
+            pumpkins[1].destroy();
+            pumpkinScore[1] = 5;
+        }
+
+        if(pumpkinHealth[2] <= 0) {
+            pumpkins[2].destroy();
+            pumpkinScore[2] = 5;
+        }
+
 
         if(fy_next_level1 === true && fy_next_level2 === true && fy_next_level3 === true) {
             fy_transistion.visible = true;
@@ -198,6 +305,69 @@ function fy_draw() {
         player.collide(f1_edges);
         player.collide(f1_walls);
         player.collide(noor);
+        player.collide(kitchen1);
+        player.collide(kitchen2);
+        player.collide(kitchen3);
+
+        if(noor.isTouching(roundGroup)) {
+            noorHealth -= 1;
+            roundGroup.destroyEach();
+        }
+
+        if(kitchen1.isTouching(roundGroup)) {
+            kit1Health -= 1;
+            roundGroup.destroyEach();
+        }
+
+        if(kitchen2.isTouching(roundGroup)) {
+            kit2Health -= 1;
+            roundGroup.destroyEach();
+        }
+
+        if(kitchen3.isTouching(roundGroup)) {
+            kit3Health -= 1;
+            roundGroup.destroyEach();
+        }
+
+        if(noor.isTouching(stream_group)) {
+            noorHealth -= 0.1;
+        }
+
+        if(kitchen1.isTouching(stream_group)) {
+            kit1Health -= 0.1;
+        }
+
+        if(kitchen2.isTouching(stream_group)) {
+            kit2Health -= 0.1;
+        }
+
+        if(kitchen3.isTouching(stream_group)) {
+            kit3Health -= 0.1;
+        }
+
+        if(noorHealth <= 0) {
+            level2Scores[0] = 30;
+            noor.destroy();
+            noorHealth = "none";
+        }
+
+        if(kit1Health <= 0) {
+            level2Scores[1] = 10;
+            kitchen1.destroy();
+            kit1Health = "none";
+        }
+
+        if(kit2Health <= 0) {
+            level2Scores[2] = 10;
+            kitchen2.destroy();
+            kit2Health = "none";
+        }
+
+        if(kit3Health <= 0) {
+            level2Scores[3] = 10;
+            kitchen3.destroy();
+            kit3Health = "none";
+        }
 
         if(f1_next_level1 === true && f1_next_level2 === true && f1_next_level3 === true) {
             f1_transistion.visible = true;
@@ -216,24 +386,29 @@ function fy_draw() {
 }
 
 function scene_change() {
-        enemyHealth = 5;
-        enemy2Health = 5;
-        enemy3Health = 5;
+        //enemyHealth = 5;
+        //enemy2Health = 5;
+        //enemy3Health = 5;
     if(gameState === sceneChange) {
-        player.remove();
-        enemy.remove();
-        enemy2.remove();
-        enemy3.remove();
-        item.remove();
-        worstfont.remove();
+        player.destroy();
+        enemy.destroy();
+        enemy2.destroy();
+        enemy3.destroy();
+        item.destroy();
+        level2_sprite.destroy();
+        level3_sprite.destroy();
+        wt_level1_sprite.destroy();
+        worstfont.destroy();
         font_group.destroyEach();
-        player_detection.remove();
-        enemy_detection.remove();
-        healthBar.remove();
-        rock_pile.remove();
+        player_detection.destroy();
+        enemy_detection.destroy();
+        healthBar.destroy();
+        rock_pile.destroy();
         roundGroup.destroyEach();
+        stream_group.destroyEach();
         enemyRound_group.destroyEach();
         if(sceneState === 2) {
+            healthCount = healthCount+100;
             front_yard_map.destroy();
             fy_transistion.destroy();
             fy_top.destroy();
@@ -245,6 +420,21 @@ function scene_change() {
             rock_pile3.destroy();
             rock_pile4.destroy();
             rock_pile5.destroy();
+        }else if(sceneState === 3) {
+            healthCount+100;
+            first_floor_map.destroy();
+            f1_transistion.destroy();
+            f1_walls.destroyEach();
+            f1_edges.destroyEach();
+            enemy4.destroy();
+            enemy5.destroy();
+            noor.destroy();
+            kitchen1.destroy();
+            kitchen2.destroy();
+            kitchen3.destroy();
+            cup[0].destroy();
+            cup[1].destroy();
+            cup[2].destroy();
         }
 
         gameState = playState;

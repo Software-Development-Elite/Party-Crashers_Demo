@@ -10,7 +10,7 @@ var highscore3 = 0;
 
 function menuSetup() {
     if(gameState === menuState) {
-        start_button = createSprite(500, 300, 80, 50);
+        start_button = createSprite(500, 400, 80, 50);
         start_button.shapeColor = ("green");
         camera.x = 500;
         camera.y = 300;
@@ -21,7 +21,7 @@ function menuSetup() {
 
 function menuDraw() {
     if(gameState === menuState) {
-        background("purple");
+        background(titleScreen);
 
         newScore = localStorage.getItem("score");
 
@@ -41,9 +41,9 @@ function menuDraw() {
         }
 
 
-        text("1."+highscore1, 100,100);
-        text("2."+highscore2, 100,150);
-        text("3."+highscore3, 100,200);
+        text("1:"+highscore1, 800,100);
+        text("2:"+highscore2, 800,150);
+        text("3:"+highscore3, 800,200);
 
         if(mousePressedOver(start_button)) {
             gameState = playState;

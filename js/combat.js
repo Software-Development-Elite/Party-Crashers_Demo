@@ -272,6 +272,16 @@ function combatSystem() {
         enemy3Health -= 0.1;
     }
 
+    if(sceneState === 2){
+        if(enemy4.isTouching(stream_group)) {
+            enemy4Health -= 0.1;
+        }
+
+        if(enemy5.isTouching(stream_group)) {
+            enemy5Health -= 0.1;
+        }
+    }
+
     if(enemy.isTouching(roundGroup)) {
         console.log("logPost");
         enemy_chaseMode = 1;
@@ -292,6 +302,23 @@ function combatSystem() {
         round.remove();
         enemy3Health -= roundDamage;
     }
+
+    if(sceneState === 2) {
+        if(enemy4.isTouching(roundGroup)) {
+            console.log("logPost");
+       // enemy4_chaseMode = 1;
+            round.remove();
+            enemy4Health -= roundDamage;
+        }
+
+        if(enemy5.isTouching(roundGroup)) {
+            console.log("logPost");
+       // enemy4_chaseMode = 1;
+            round.remove();
+            enemy5Health -= roundDamage;
+        }
+    }
+
 
     if(player.isTouching(enemyRound_group)) {
         enemyRound.remove();
@@ -350,6 +377,65 @@ function combatSystem() {
                 }
             }
         }
+    }else if(sceneState === 2) {
+        if(enemy4Health > 0) {
+            if(frameCount % 80 === 0) {
+                if(enemy_position === enemyY1) {
+                    enemyRound = createSprite(enemy4.x, enemy4.y, 10, 10);
+                    enemyRound_group.add(enemyRound);
+                    enemyRound.velocityY =-20;
+                }else if(enemy_position === enemyY1X1) {
+                    enemyRound = createSprite(enemy4.x, enemy4.y, 10, 10);
+                    enemyRound_group.add(enemyRound);
+                    enemyRound.velocityY =-20;
+                    enemyRound.velocityX =-20;
+                }else if(enemy_position === enemyX1) {
+                    enemyRound = createSprite(enemy4.x, enemy4.y, 10, 10);
+                    enemyRound_group.add(enemyRound);
+                    enemyRound.velocityX =-20;
+                }else if(enemy_position === enemyY2X1) {
+                    enemyRound = createSprite(enemy4.x, enemy4.y, 10, 10);
+                    enemyRound_group.add(enemyRound);
+                    enemyRound.velocityY =20;
+                    enemyRound.velocityX =-20;
+                }else if(enemy_position === enemyY2) {
+                    enemyRound = createSprite(enemy4.x, enemy4.y, 10, 10);
+                    enemyRound_group.add(enemyRound);
+                    enemyRound.velocityY =20;
+                }else if(enemy_position === enemyY2X2) {
+                    enemyRound = createSprite(enemy4.x, enemy4.y, 10, 10);
+                    enemyRound_group.add(enemyRound);
+                    enemyRound.velocityY =20;
+                    enemyRound.velocityX =20;
+                }else if(enemy_position === enemyX2) {
+                    enemyRound = createSprite(enemy4.x, enemy4.y, 10, 10);
+                    enemyRound_group.add(enemyRound);
+                    enemyRound.velocityX =20;
+                }else if(enemy_position === enemyY1X2) {
+                    enemyRound = createSprite(enemy4.x, enemy4.y, 10, 10);
+                    enemyRound_group.add(enemyRound);
+                    enemyRound.velocityY =-20;
+                    enemyRound.velocityX =20;
+                }
+            }
+        }
+    }else if(sceneState === 3) {
+        if(michael.isTouching(roundGroup)) {
+            michaelHealth -= 20;
+            roundGroup.destroyEach();
+        }
+
+        if(michael.isTouching(stream_group)) {
+            michaelHealth -= 1;
+        }
+
+        if(michaelHealth === 0) {
+            michael.destroy();
+            michaelBonus = 80;
+            gameState = gameOver;
+            setup();
+            redraw();
+        }        
     }
 
     if(enemyHealth < 0){
@@ -362,6 +448,18 @@ function combatSystem() {
 
     if(enemy3Health < 0){
         enemy3Health = 0;
+    }
+
+    if(enemy4Health < 0){
+        enemy4Health = 0;
+    }
+
+    if(enemy5Health < 0){
+        enemy5Health = 0;
+    }
+
+    if(michaelHealth < 0) {
+        michaelHealth = 0;
     }
 }
 
