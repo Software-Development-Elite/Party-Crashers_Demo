@@ -30,6 +30,10 @@ function playDraw() {
         scoringSystem();
         refill_system();
 
+        if(keyDown("p")) {
+            healthCount = 0;
+        }
+
         debugEnabled();
     }
 }
